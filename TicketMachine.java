@@ -19,16 +19,18 @@ public class TicketMachine
     private int total;
     //Posibilidad de premio
     private boolean premio;
-
+    //Limite de tickets de la máquina
+    private int limite;
     /**
      * Create a machine that issues tickets of the given price.
      */
-    public TicketMachine(int cost, boolean Premiado)
+    public TicketMachine(int cost, boolean premiado, int limiteTicket)
     {
         price = cost;
         balance = 0;
         total = 0;
-        premio = Premiado;
+        premio = premiado;
+        limite = limiteTicket;
     }
 
     /**
@@ -54,8 +56,11 @@ public class TicketMachine
      */
     public void insertMoney(int amount)
     {
-        if(amount > 0) {
+        if(amount > 0 & limite > 0) {
             balance = balance + amount;
+        }
+        else if (amount > 0 & limite == 0) {
+            System.out.print("Error, no quedan billetes");
         }
         else {
             System.out.println("Use a positive amount rather than: " +
@@ -83,7 +88,7 @@ public class TicketMachine
             total = total + price;
             // Reduce the balance by the prince.
             balance = balance - price;
-            
+
             System.out.println("¡Ticket premiado!");
             System.out.println("##################");
             System.out.println("# The BlueJ Line");
@@ -96,8 +101,10 @@ public class TicketMachine
             total = total + price;
             // Reduce the balance by the prince.
             balance = balance - price;
+            // Limitador
+            limite = limite -1;
         }
-        
+
         else if(balance >= price & premio == true){
             // Simulate the printing of a ticket.
             System.out.println("##################");
@@ -111,6 +118,8 @@ public class TicketMachine
             total = total + price;
             // Reduce the balance by the prince.
             balance = balance - price;
+            // Limitador
+            limite = limite -1;
         }
         else {
             System.out.println("You must insert at least: " +
