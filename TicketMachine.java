@@ -84,16 +84,10 @@ public class TicketMachine
             System.out.println("##################");
             System.out.println();
 
-            // Update the total collected with the price.
-            total = total + price;
-            // Reduce the balance by the prince.
-            balance = balance - price;
-
             System.out.println("¡Ticket premiado!");
             System.out.println("##################");
             System.out.println("# The BlueJ Line");
             System.out.println("# Ticket");
-            System.out.println("# " + price + " cents.");
             System.out.println("##################");
             System.out.println();
 
@@ -105,7 +99,7 @@ public class TicketMachine
             limite = limite -1;
         }
 
-        else if(balance >= price & premio == true){
+        else if(balance >= price & premio == false){
             // Simulate the printing of a ticket.
             System.out.println("##################");
             System.out.println("# The BlueJ Line");
