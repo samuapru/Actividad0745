@@ -17,15 +17,18 @@ public class TicketMachine
     private int balance;
     // The total amount of money collected by this machine.
     private int total;
+    //Posibilidad de premio
+    private boolean premio;
 
     /**
      * Create a machine that issues tickets of the given price.
      */
-    public TicketMachine(int cost)
+    public TicketMachine(int cost, boolean Premiado)
     {
         price = cost;
         balance = 0;
         total = 0;
+        premio = Premiado;
     }
 
     /**
@@ -67,7 +70,35 @@ public class TicketMachine
      */
     public void printTicket()
     {
-        if(balance >= price) {
+        if(balance >= price & premio == true) {
+            // Simulate the printing of a ticket.
+            System.out.println("##################");
+            System.out.println("# The BlueJ Line");
+            System.out.println("# Ticket");
+            System.out.println("# " + price + " cents.");
+            System.out.println("##################");
+            System.out.println();
+
+            // Update the total collected with the price.
+            total = total + price;
+            // Reduce the balance by the prince.
+            balance = balance - price;
+            
+            System.out.println("¡Ticket premiado!");
+            System.out.println("##################");
+            System.out.println("# The BlueJ Line");
+            System.out.println("# Ticket");
+            System.out.println("# " + price + " cents.");
+            System.out.println("##################");
+            System.out.println();
+
+            // Update the total collected with the price.
+            total = total + price;
+            // Reduce the balance by the prince.
+            balance = balance - price;
+        }
+        
+        else if(balance >= price & premio == true){
             // Simulate the printing of a ticket.
             System.out.println("##################");
             System.out.println("# The BlueJ Line");
@@ -100,6 +131,9 @@ public class TicketMachine
         return amountToRefund;
     }
 
+    /**
+     * Vaciado de la máquina con error si está una operación en curso
+     */
     public int emptyMachine()
     {
         int vaciarMaquina;
@@ -107,8 +141,9 @@ public class TicketMachine
             vaciarMaquina = total;
             total = 0;
         }
-        else {System.out.println("Error, operación en curso");
-             vaciarMaquina = -1;
+        else {
+            System.out.println("Error, operación en curso");
+            vaciarMaquina = -1;
         }
         return vaciarMaquina;
     }
